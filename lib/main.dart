@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:my_first_flutter/favorites_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -60,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
         break;
       case 1:
-        page = Placeholder();
+        page = FavoritePage();
         break;
       default:
         throw UnimplementedError("not widget for $selectedIndex");
@@ -87,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   onDestinationSelected: (value) {
                     setState(() {
                       selectedIndex = value;
-                      // selectedIndex = 2;
                     });
                     print('selected: $value');
                     print('selectedIndex: $selectedIndex');
@@ -115,11 +115,6 @@ class GeneratorPage extends StatelessWidget {
     var pair = appState.current;
 
     IconData icon;
-    // if (appState.favorites.contains(pair)) {
-    //   icon = Icons.favorite;
-    // } else {
-    //   icon = Icons.favorite_border;
-    // }
     var isLiked = appState.favorites.contains(pair);
     icon = isLiked ? Icons.favorite : Icons.favorite_border;
 
@@ -152,54 +147,6 @@ class GeneratorPage extends StatelessWidget {
     ));
   }
 }
-
-// class MyHomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     var appState = context.watch<MyAppState>();
-//     var pair = appState.current;
-//
-//     IconData icon;
-//     if (appState.favorites.contains(pair)) {
-//       icon = Icons.favorite;
-//     } else {
-//       icon = Icons.favorite_border;
-//     }
-//
-//     return Scaffold(
-//         body: Center(
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           // Text("A random AWESOME idea:"),
-//           BigCard(pair: pair),
-//           SizedBox(height: 20),
-//           Row(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               ElevatedButton.icon(
-//                 onPressed: () {
-//                   appState.toggleFavorite();
-//                 },
-//                 icon: Icon(icon),
-//                 label: Text("\u{1f60e} Like"),
-//               ),
-//               SizedBox(
-//                 width: 10,
-//               ),
-//               ElevatedButton(
-//                 onPressed: () {
-//                   appState.getNext();
-//                 },
-//                 child: Text('Next'),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     ));
-//   }
-// }
 
 class BigCard extends StatelessWidget {
   const BigCard({
