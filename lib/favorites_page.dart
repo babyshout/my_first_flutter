@@ -20,10 +20,46 @@ class FavoritePage extends StatelessWidget {
               print("hello");
             },
           ),
-          for (var favorite in favorites) Text("${favorite.first} ${favorite.second}"),
-          // favorites.map((favorite) => Text(favorite.first)).toList(),
+          for (var favorite in favorites)
+            ListTile(
+              title: Text("${favorite.first} ${favorite.second}"),
+              leading: Icon(Icons.favorite),
+            ),
+          favorites.map((favorite) => return Text(favorite.first)).toList(),
         ],
       ),
     );
   }
+}
+
+
+class FavoritesPageCodelab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    if (appState.favorites.isEmpty) {
+      return Center(
+        child: Text('No Favorites yet'),
+      );
+    }
+
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('You have '
+              '${appState.favorites.length} favorites:'),
+        ),
+        for (var pair in appState.favorites)
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text(pair.asLowerCase),
+          ),
+      ],
+    )
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+
 }
